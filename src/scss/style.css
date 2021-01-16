@@ -1,0 +1,47 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.card .card-image {
+  padding-top: 10px;
+}
+
+.card .card-content {
+  padding: 15px 20px;
+}
+
+.card .card-title {
+  font-weight: 500;
+}
+
+.standing {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 480px;
+}
+
+.standing .logo {
+  padding: 10px 0;
+}
+
+.standing .standing-info .standing-info-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 5px;
+  font-size: 18px;
+  font-weight: 450;
+}
+/*# sourceMappingURL=style.css.map */

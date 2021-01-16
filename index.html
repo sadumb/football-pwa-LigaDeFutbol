@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Football PWA</title>
+  <meta name="description" content="Footbal-PWA" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="src/css/materialize.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  <link rel="stylesheet" href="src/scss/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#00897B" />
+</head>
+<body>
+  <!-- Navigasi -->
+  <nav class="teal lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo" id="logo-container">Football PWA</a>
+      <a href="#" class="sidenav-trigger" data-target="nav-mobile">☰</a>
+      <ul class="topnav right hide-on-med-and-down"></ul>
+      <ul class="sidenav" id="nav-mobile"></ul>
+    </div>
+  </nav>
+  <!-- Akhir Navigasi -->
+
+  <div class="body-content container"></div>
+  
+  <script src="src/script/materialize.min.js"></script>
+  <script src="src/script/idb.js"></script>
+  <script src="src/script/main.js" type="module"></script>
+  
+
+
+  <script>
+  // REGISTER SERVICE WORKER
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/service-worker.js')
+      .then(function() {
+        console.log('Pendaftaran ServiceWorker berhasil');
+      })
+      .catch(function(){
+        console.log('Pendaftaran ServiceWorker gagal');
+      });
+    })
+  } else {
+    console.log("ServiceWorker belum didukung browser ini.")
+  }
+</script>
+</body>
+</html>

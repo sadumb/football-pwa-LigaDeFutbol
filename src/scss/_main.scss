@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+.card {
+    .card-image {
+        padding-top: 10px;
+    }
+    .card-content {
+        padding: 15px 20px;
+    }
+    .card-title {
+        font-weight: 500;
+    }
+}
+
+.standing {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 480px;
+
+    .logo {
+        padding: 10px 0;
+    }
+
+    .standing-info {
+        .standing-info-line{
+            display: flex;
+            justify-content: space-between;
+            padding: 0 5px;
+            font-size: 18px;
+            font-weight: 450;
+        }
+    }
+}
