@@ -17,6 +17,8 @@ var urlsToCache = [
 	'/src/script/nav.js',
 	'src/script/db.js',
 	'src/script/idb.js',
+	'src/script/sw-register.js',
+    'src/script/event_listener.js',
 
 	'/manifest.json'
 	
@@ -67,3 +69,25 @@ self.addEventListener("fetch", function(event) {
 	}
 });
 
+//push notification
+
+self.addEventListener('push', function(event) {
+	let body;
+	if (event.data) {
+	  body = event.data.text();
+	} else {
+	  body = 'Push message no payload';
+	}
+	let options = {
+	  body: body,
+	  icon: '/icon.png',
+	  vibrate: [100, 50, 100],
+	  data: {
+		dateOfArrival: Date.now(),
+		primaryKey: 1
+	  }
+	};
+	event.waitUntil(
+	  self.registration.showNotification('Push Notification', options)
+	);
+});
