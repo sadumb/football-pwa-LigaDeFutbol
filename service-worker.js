@@ -1,4 +1,4 @@
-const CACHE_NAME = 'football-PWA-v1';
+const CACHE_NAME = 'football-PWA-v1.0';
 var urlsToCache = [
 	'/',
 	'/index.html',

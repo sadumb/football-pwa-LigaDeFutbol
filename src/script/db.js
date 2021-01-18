@@ -13,21 +13,38 @@ const saveMatch = ({id,home,away,date}) => {
           id: id,
           home: home,
           away: away,
-          utcDate: date,
-          created: new Date().getTime()
+          date: date,
       };
       store.put(item, id); //menambahkan key "teams"
       return tx.complete;
   })
-  .then(() => console.log('Berhasil Menyimpan Pertandingan'))
+  .then(() =>  M.toast({html: `Berhasil Menyimpan pertandingan!`, classes: 'rounded'}))
   .catch(() => console.log('Gagal Menyimpan Pertandingan'))
 }
 
-const addSavedMatch = (id,home,away,date) => {
-  //Add To Database
-  saveMatch({id,home,away,date})
-  //Display Toast
-  console.log('berhasil menambahkan match')
+const deleteMatch = id => {
+  dbPromise
+      .then(db => {
+          let tx = db.transaction('matches', 'readwrite')
+          let store = tx.objectStore('matches')
+          store.delete(id)
+          return tx.complete
+      })
+      .then(() => console.log('Item Deleted'))
 }
 
-export { saveMatch, addSavedMatch };
+const getMatch = () => {
+  return new Promise(function(resolve, reject) {
+    dbPromise
+      .then(db => {
+          let tx = db.transaction('matches','readonly')
+          let store = tx.objectStore('matches')
+
+          return store.getAll()
+      })
+      .then(data => {
+        resolve(data)
+      })
+ })
+}
+export { saveMatch, getMatch, deleteMatch };

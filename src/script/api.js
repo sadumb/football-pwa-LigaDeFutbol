@@ -1,4 +1,5 @@
-import { addSavedMatch } from './db.js'
+import { getAllMatch, addSavedMatch, deleteSavedMatch } from './event_listener.js';
+import { showNotifikasiSederhana } from './sw-register.js';
 
 const BASE_URL = "https://api.football-data.org/v2";
 const API_KEY = "be743db73dd74b4babb697ade6949cb3";
@@ -7,10 +8,13 @@ const OPTION = {
     "X-Auth-Token": API_KEY
   }
 }
-const LEAGUE = "2014" //liga Spanyol / La liga
+const LEAGUE = "2014" // liga Spanyol / La liga
 
-// declare addSavedMatch from db to window
+// register listener from event_listener to window
 window.addSavedMatch = addSavedMatch;
+window.getAllMatch = getAllMatch;
+window.deleteSavedMatch = deleteSavedMatch;
+window.showNotifikasiSederhana = showNotifikasiSederhana;
 
 let status = response => {
   if(response.status != 200){
@@ -184,9 +188,6 @@ const getStandings = () => {
 
 const getUpcomingMatches = () => {
   return new Promise(function(resolve, reject) {
-    // Ambil nilai query parameter (?id=)
-    let urlParams = new URLSearchParams(window.location.search);
-    let idParam = urlParams.get("id");
 
     if ("caches" in window) {
       caches.match(`${BASE_URL}/competitions/${LEAGUE}/matches?status=SCHEDULED$`)
@@ -201,14 +202,14 @@ const getUpcomingMatches = () => {
                 <div class="col s12 m6">
                   <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
-                      <span class="card-title center">${match.utcDate.slice(0,10)}</span>
+                      <span class="card-title center">${match.utcDate.reverse()}</span>
                       <p class="center">${match.homeTeam.name}</p> 
                       <p class="center">VS</p>
                       <p class="center">${match.awayTeam.name}</p>
                       <p class="center">UTC @${match.utcDate.slice(12,16)} </p>
                         <div>
                         <a class="btn-floating btn-large red">
-                          <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate.slice(0,10)}')" class="large material-icons save">save</i>
+                          <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotifikasiSederhana()" class="large material-icons save">save</i>
                         </a>
                         </div>
                     </div>
@@ -242,7 +243,7 @@ const getUpcomingMatches = () => {
                   <p class="center">UTC @${match.utcDate.slice(12,16)} </p>
                     <div>
                     <a class="btn-floating btn-large red">
-                      <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate.slice(0,10)}')" class="large material-icons save">save</i>
+                      <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotifikasiSederhana()" class="large material-icons save">save</i>
                     </a>
                     </div>
                 </div>
@@ -258,5 +259,3 @@ const getUpcomingMatches = () => {
 }
 
 export { getStandings, getUpcomingMatches };
-
-//<button onclick="addSavedMatch${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate.slice(0,10)}')" class="waves-effect waves-light btn orange accent-3">BOOKMARK</button>

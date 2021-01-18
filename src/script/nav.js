@@ -1,4 +1,5 @@
 import { getStandings, getUpcomingMatches } from './api.js';
+import { getAllMatch } from './event_listener.js';
 
 function loadNav()
 {
@@ -38,7 +39,6 @@ function loadNav()
 
 function loadPage(page)
 {
-	var page = window.location.hash.substr(1);
 	if(page == '') page = 'home';
 	
 	var xhttp = new XMLHttpRequest();
@@ -51,6 +51,8 @@ function loadPage(page)
 					getStandings();
 				} else if(page === 'match') {
 					getUpcomingMatches()
+				}  else if(page === 'saved') {
+					getAllMatch()
 				}
 			} else if(this.status == 404) {
 				content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
