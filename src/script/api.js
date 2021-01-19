@@ -1,5 +1,5 @@
 import { getAllMatch, addSavedMatch, deleteSavedMatch } from './event_listener.js';
-import { showNotifikasiSederhana } from './sw-register.js';
+import { showNotification } from './sw-register.js';
 
 const BASE_URL = "https://api.football-data.org/v2";
 const API_KEY = "be743db73dd74b4babb697ade6949cb3";
@@ -14,7 +14,27 @@ const LEAGUE = "2014" // liga Spanyol / La liga
 window.addSavedMatch = addSavedMatch;
 window.getAllMatch = getAllMatch;
 window.deleteSavedMatch = deleteSavedMatch;
-window.showNotifikasiSederhana = showNotifikasiSederhana;
+window.showNotification = showNotification;
+
+// handle preloader
+
+function finishLoading() {
+  const loading = document.getElementById('loading-container');
+  loading.style.display = 'none';
+};
+
+function error(error) {
+  console.log('Error: ' + error);
+ 
+  const loadFailed = `
+    <p class="white-text center-align">
+      Gagal memuat data. Periksa koneksi internet lalu coba lagi.
+    </p>
+  `;
+ 
+  document.getElementById('progress-bar').className = 'determinate';
+  document.getElementById('load-failed').innerHTML = loadFailed;
+};
 
 let status = response => {
   if(response.status != 200){
@@ -100,8 +120,8 @@ const getStandings = () => {
               </div>     
             `;
          })
-
         document.querySelector("#standing").innerHTML = standingHTML;
+        finishLoading()
       });
      }
    })
@@ -183,16 +203,17 @@ const getStandings = () => {
             `;
       })
       document.querySelector("#standing").innerHTML = standingHTML;
+      finishLoading()
   });
 }
 
 const getUpcomingMatches = () => {
   return new Promise(function(resolve, reject) {
-
     if ("caches" in window) {
-      caches.match(`${BASE_URL}/competitions/${LEAGUE}/matches?status=SCHEDULED$`)
+      caches.match(`${BASE_URL}/competitions/${LEAGUE}/matches?status=SCHEDULED`)
         .then(function(response) {
           if (response) {
+            console.log('sukses cache')
             response.json().then(function(data) {
             const MATCHES = data.matches;
               let matchesHTML = "";
@@ -202,7 +223,7 @@ const getUpcomingMatches = () => {
                 <div class="col s12 m6">
                   <div class="card match-card">
                     <a class="btn-floating btn-medium orange right add_match">
-                      <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotifikasiSederhana()" class="large material-icons save">star</i>
+                      <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotification()" class="large material-icons save">star</i>
                     </a>
                     <div class="card-content">
                       <p class="center team-name">${match.homeTeam.name}</p> 
@@ -220,7 +241,8 @@ const getUpcomingMatches = () => {
             
             document.querySelector("#match-list").innerHTML = matchesHTML;
             // Kirim objek data hasil parsing json agar bisa disimpan ke indexed db
-            resolve(match);
+            resolve(MATCHES)
+            finishLoading()
           });
         }
       });
@@ -231,12 +253,13 @@ const getUpcomingMatches = () => {
       .then(function(data) {
         const MATCHES = data.matches;
         let matchesHTML = "";
+
         MATCHES.forEach(function(match){           
           matchesHTML += `
             <div class="col s12 m6">
               <div class="card match-card">
                 <a class="btn-floating btn-medium orange right add_match">
-                  <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotifikasiSederhana()" class="large material-icons save">star</i>
+                  <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotification()" class="large material-icons save">star</i>
                 </a>
                 <div class="card-content">
                   <p class="center team-name">${match.homeTeam.name}</p> 
@@ -253,7 +276,8 @@ const getUpcomingMatches = () => {
         })
             document.querySelector("#match-list").innerHTML = matchesHTML;
             // Kirim objek data hasil parsing json agar bisa disimpan ke indexed db
-            resolve(MATCHES);
+            resolve(MATCHES)
+            finishLoading()
           });
       });
 }

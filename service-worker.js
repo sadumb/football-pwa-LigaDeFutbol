@@ -1,9 +1,10 @@
-const CACHE_NAME = 'football-PWA-v1.2';
+const CACHE_NAME = 'football-PWA-v1.1';
 var urlsToCache = [
 	'/',
 	'/index.html',
+	'/nav.html',
 	'/src/css/materialize.min.css',
-	'/src/scss/style.css',
+	'/src/scss/style.css',	
 
 	'/src/pages',
 	'/src/pages/home.html',
@@ -11,16 +12,31 @@ var urlsToCache = [
 	'/src/pages/saved.html',
 	'/src/pages/standing.html',
 
-	'/src/script',
+	'/push.js',
 	'/src/script/api.js',
+	'/src/script/db.js',
+	'/src/script/event_listener.js',
+	'/src/script/idb.js',
+	'/src/script/main.js',
 	'/src/script/materialize.min.js',
 	'/src/script/nav.js',
-	'src/script/db.js',
-	'src/script/idb.js',
-	'src/script/sw-register.js',
-    'src/script/event_listener.js',
+	'/src/script/sw-register.js',
 
-	'/manifest.json'
+	'src/assets/icons/icon192.png',
+	'src/assets/icons/icon512.png',
+	'src/assets/icons/maskable_icon_x72.png',
+	'src/assets/icons/maskable_icon_x96.png',
+	'src/assets/icons/maskable_icon_x144.png',
+	'src/assets/logo/favicon.ico',
+
+	'/src/assets/img/stadium-hd.jpg',
+	'/src/assets/logo/logo.png',
+
+	'/package-lock.json',
+	'/manifest.json',
+
+	'https://fonts.googleapis.com/icon?family=Material+Icons',
+	'https://use.fontawesome.com/releases/v5.15.1/css/all.css'
 	
 ];
 

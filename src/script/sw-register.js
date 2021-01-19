@@ -70,11 +70,11 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-function showNotifikasiSederhana() {
-  const title = 'Notifikasi Sederhana';
+const showNotification = () => {
+  const title = 'Succes!';
   const options = {
       'body': 'Berhasil menambahkan pertandingan!',
-      'icon': '/icon.png',
+      'icon': '/src/assets/logo/logo.png',
   }
   if (Notification.permission === 'granted') {
       navigator.serviceWorker.ready.then(function(registration) {
@@ -85,4 +85,4 @@ function showNotifikasiSederhana() {
   }
 }
 
-export { swRegister, notifyRegister, requestPermission, showNotifikasiSederhana };
+export { swRegister, notifyRegister, requestPermission, showNotification };

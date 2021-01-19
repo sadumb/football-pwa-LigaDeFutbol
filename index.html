@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Football PWA</title>
-  <meta name="description" content="Footbal-PWA" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="src/css/materialize.min.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  <meta name="description" content="Footbal-PWA">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="src/css/materialize.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+    integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
   <link rel="stylesheet" href="src/scss/style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#00897B" />
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/src/assets/icons/icon192.png">
+  <link rel="shortcut icon" type="image/jpg" href="/src/assets/logo/favicon.ico"/>
+  <meta name="theme-color" content="#00897B">
 </head>
+
 <body>
   <!-- Navigasi -->
   <nav role="navigation">
@@ -24,13 +29,16 @@
       <ul class="sidenav" id="nav-mobile"></ul>
     </div>
   </nav>
-  
+
   <!-- Akhir Navigasi -->
-  <div class="home-content"></div>
-  <div class="body-content container"></div>
+  <div id="preloader">
+    <div class="home-content"></div>
+    <div class="body-content container"></div>
+  </div>
 
   <script src="src/script/materialize.min.js"></script>
   <script src="src/script/idb.js"></script>
   <script src="src/script/main.js" type="module"></script>
 </body>
+
 </html>
