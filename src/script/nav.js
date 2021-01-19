@@ -6,23 +6,23 @@ function loadNav()
 	let elems = document.querySelectorAll('.sidenav');
 	M.Sidenav.init(elems);
 
-	var xhttp = new XMLHttpRequest();
+	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4){
 			if(this.status != 200) return;
 
 			// Muat daftar tautan menu
-			document.querySelectorAll(".topnav, .sidenav")
+			document.querySelectorAll('.topnav, .sidenav, #nav-logo')
 			.forEach(function(elm){
 				elm.innerHTML = xhttp.responseText;
 			});
 
 			// Daftarkan event listener untuk setiap tautan menu
-			document.querySelectorAll('.sidenav a, .topnav a')
+			document.querySelectorAll('.sidenav a, .topnav a, #nav-logo')
 			.forEach(function(elm){
 				elm.addEventListener('click', function(event){
 					// Tutup sidenav
-					var sidenav = document.querySelector('.sidenav');
+					let sidenav = document.querySelector('.sidenav');
 					M.Sidenav.getInstance(sidenav).close();
 					
 					// Muat konten halaman yang dipanggil 
@@ -41,17 +41,35 @@ function loadPage(page)
 {
 	if(page == '') page = 'home';
 	
-	var xhttp = new XMLHttpRequest();
+	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4){
-			var content = document.querySelector(".body-content");
+			let content = document.querySelector(".body-content");
+			let home_content = document.querySelector(".home-content");
 			if(this.status == 200) {
 				content.innerHTML = xhttp.responseText;
-				if(page == 'standing') {
+				
+				// fungsi untuk memindahkan taget render dari body-content ke home_content
+				const loadHomeContent = () => {
+					home_content.innerHTML = content.innerHTML;
+				};
+				// fungsi untuk memberhentikan loading content yg diinginkan
+				const dontLoadContent = (content_section) => {
+					content_section.innerHTML = '';
+				};
+
+				if(page === 'home') {
+					loadHomeContent()
+					// mengosongkan konten supaya tidak terload
+					dontLoadContent(content)
+				} else if(page === 'standing') {
+					dontLoadContent(home_content)
 					getStandings();
 				} else if(page === 'match') {
+					dontLoadContent(home_content)
 					getUpcomingMatches()
 				}  else if(page === 'saved') {
+					dontLoadContent(home_content)
 					getAllMatch()
 				}
 			} else if(this.status == 404) {

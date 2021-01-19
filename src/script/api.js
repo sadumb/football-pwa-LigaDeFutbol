@@ -200,19 +200,19 @@ const getUpcomingMatches = () => {
               MATCHES.forEach(function(match) {
                 matchesHTML += `
                 <div class="col s12 m6">
-                  <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
-                      <span class="card-title center">${match.utcDate.reverse()}</span>
-                      <p class="center">${match.homeTeam.name}</p> 
-                      <p class="center">VS</p>
-                      <p class="center">${match.awayTeam.name}</p>
-                      <p class="center">UTC @${match.utcDate.slice(12,16)} </p>
-                        <div>
-                        <a class="btn-floating btn-large red">
-                          <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotifikasiSederhana()" class="large material-icons save">save</i>
-                        </a>
-                        </div>
-                    </div>
+                  <div class="card match-card">
+                    <a class="btn-floating btn-medium orange right add_match">
+                      <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotifikasiSederhana()" class="large material-icons save">star</i>
+                    </a>
+                    <div class="card-content">
+                      <p class="center team-name">${match.homeTeam.name}</p> 
+                      <p class="center versus">VS</p>
+                      <p class="center team-name">${match.awayTeam.name}</p>
+                      </div>
+                      <div class="card-content match-footer">
+                        <span>$${match.utcDate.slice(6, 10)}</span>
+                        <span>UTC ${match.utcDate.slice(12,16)} </span>
+                      </div>    
                   </div>
                 </div>
               `;
@@ -231,22 +231,22 @@ const getUpcomingMatches = () => {
       .then(function(data) {
         const MATCHES = data.matches;
         let matchesHTML = "";
-        MATCHES.forEach(function(match){
+        MATCHES.forEach(function(match){           
           matchesHTML += `
             <div class="col s12 m6">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title center">${match.utcDate.slice(0,10)}</span>
-                  <p class="center">${match.homeTeam.name}</p> 
-                  <p class="center">VS</p>
-                  <p class="center">${match.awayTeam.name}</p>
-                  <p class="center">UTC @${match.utcDate.slice(12,16)} </p>
-                    <div>
-                    <a class="btn-floating btn-large red">
-                      <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotifikasiSederhana()" class="large material-icons save">save</i>
-                    </a>
-                    </div>
-                </div>
+              <div class="card match-card">
+                <a class="btn-floating btn-medium orange right add_match">
+                  <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}','${match.utcDate}'), showNotifikasiSederhana()" class="large material-icons save">star</i>
+                </a>
+                <div class="card-content">
+                  <p class="center team-name">${match.homeTeam.name}</p> 
+                  <p class="center versus">VS</p>
+                  <p class="center team-name">${match.awayTeam.name}</p>
+                  </div>
+                  <div class="card-content match-footer">
+                    <span>${match.utcDate.slice(6, 10)}</span>
+                    <span>UTC ${match.utcDate.slice(12,16)} </span>
+                  </div>
               </div>
             </div>
           `;
