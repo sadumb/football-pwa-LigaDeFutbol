@@ -1,4 +1,4 @@
-const CACHE_NAME = 'football-PWA-v1.1';
+const CACHE_NAME = 'Liga-de-Futbol-v1';
 var urlsToCache = [
 	'/',
 	'/index.html',
@@ -20,7 +20,7 @@ var urlsToCache = [
 	'/src/script/main.js',
 	'/src/script/materialize.min.js',
 	'/src/script/nav.js',
-	'/src/script/sw-register.js',
+	'/src/script/pwa-register.js',
 
 	'src/assets/icons/icon192.png',
 	'src/assets/icons/icon512.png',

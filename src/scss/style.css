@@ -2,7 +2,7 @@ header {
   padding: 100px 0;
   height: 100vh;
   width: 100%;
-  background-color: #0C1B6A;
+  background-color: #0c1b6a;
   background-image: url("/src/assets/img/stadium-hd.jpg");
   background-position: bottom;
   background-size: cover;
@@ -19,7 +19,7 @@ header {
 }
 
 header::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
@@ -68,7 +68,7 @@ header .hero p {
 }
 
 nav {
-  background-color: #0C1B6A !important;
+  background-color: #0c1b6a !important;
 }
 
 nav #nav-logo {
