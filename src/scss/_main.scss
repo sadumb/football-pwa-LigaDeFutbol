@@ -2,6 +2,34 @@
   box-sizing: border-box;
 }
 
+/* Header content */
+.sideline {
+  overflow: hidden;
+  text-align: center;
+}
+
+.sideline:before,
+.sideline:after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 2px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.sideline:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.sideline:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+/* Nav content */
 nav {
   background-color: #0c1b6a !important;
 
@@ -14,6 +42,7 @@ nav {
   }
 }
 
+/* Body content */
 .card {
   .card-image {
     padding-top: 10px;
