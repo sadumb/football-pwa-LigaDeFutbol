@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Liga-de-Futbol-v1';
+const CACHE_NAME = 'Liga-de-Futbol-v1.0';
 var urlsToCache = [
 	'/',
 	'/index.html',

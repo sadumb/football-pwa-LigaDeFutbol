@@ -1,5 +1,6 @@
 import { getAllMatch, addSavedMatch, deleteSavedMatch } from './event_listener.js';
 import { showNotification } from './pwa-register.js';
+import { checkSaved } from './db.js';
 
 const BASE_URL = 'https://api.football-data.org/v2';
 const API_KEY = 'be743db73dd74b4babb697ade6949cb3';
@@ -15,7 +16,7 @@ window.addSavedMatch = addSavedMatch;
 window.getAllMatch = getAllMatch;
 window.deleteSavedMatch = deleteSavedMatch;
 window.showNotification = showNotification;
-
+window.checkSaved = checkSaved
 // handle preloader
 
 function finishLoading() {
@@ -224,12 +225,16 @@ const getUpcomingMatches = () => {
               let matchesHTML = '';
 
               MATCHES.forEach(function (match) {
+                checkSaved(match.id);
                 matchesHTML += `
                 <div class="col s12 m8 offset-m2 l6">
                   <div class="card match-card">
                     <a class="btn-floating btn-medium orange right add_match">
-                      <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}',
-                      '${match.utcDate}'), showNotification()" class="large material-icons save">star</i>
+                      <i onclick="
+                      addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}',
+                      '${match.utcDate}'), showNotification(), this.parentElement.style.visibility = 'hidden'" 
+                      id="${match.id}" class="large material-icons save">star
+                      </i>
                     </a>
                     <div class="card-content">
                       <p class="center team-name">${match.homeTeam.name}</p> 
@@ -261,12 +266,16 @@ const getUpcomingMatches = () => {
         let matchesHTML = '';
 
         MATCHES.forEach(function (match) {
+          checkSaved(match.id);
           matchesHTML += `
             <div class="col s12 m8 offset-m2 l6">
               <div class="card match-card">
                 <a class="btn-floating btn-medium orange right add_match">
-                  <i onclick="addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}',
-                  '${match.utcDate}'),showNotification()" class="large material-icons save">star</i>
+                  <i onclick="
+                  addSavedMatch(${match.id},'${match.homeTeam.name}','${match.awayTeam.name}',
+                  '${match.utcDate}'), showNotification(), this.parentElement.style.visibility = 'hidden'" 
+                  id="${match.id}" class="large material-icons save">star
+                  </i>
                 </a>
                 <div class="card-content">
                   <p class="center team-name">${match.homeTeam.name}</p> 

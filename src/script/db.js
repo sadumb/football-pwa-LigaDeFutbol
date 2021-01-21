@@ -41,7 +41,6 @@ const getMatch = () => {
       .then((db) => {
         let tx = db.transaction('matches', 'readonly');
         let store = tx.objectStore('matches');
-
         return store.getAll();
       })
       .then((data) => {
@@ -49,4 +48,23 @@ const getMatch = () => {
       });
   });
 };
-export { saveMatch, getMatch, deleteMatch };
+
+const checkSaved = id =>{
+  dbPromise
+    .then(function(db){
+      const tx = db.transaction('matches', 'readonly');
+      const store = tx.objectStore('matches');
+      return store.getAll();
+    })
+    .then(function(matches){
+      matches.forEach(function(match) {
+        if(match.id === id) {
+          const saveButton = document.querySelector(`[id="${match.id}"]`);
+          // hide save icon if match are already saved
+          saveButton.parentElement.style.visibility = 'hidden';
+        }
+      });
+    });
+}
+
+export { saveMatch, getMatch, deleteMatch , checkSaved };

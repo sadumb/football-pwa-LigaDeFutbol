@@ -153,4 +153,8 @@ nav #nav-logo {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
 }
+
+.hidden {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */
